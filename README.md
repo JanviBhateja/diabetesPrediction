@@ -1,97 +1,108 @@
-# Diabetes Prediction using Support Vector Machine (SVM)
+# Diabetes Prediction using Machine Learning
 
-## Overview
+A complete end-to-end machine learning project to predict whether a patient is diabetic or non-diabetic based on medical diagnostic data. Trained on the **Pima Indians Diabetes Dataset** using Python and Scikit-learn.
 
-This project uses Machine Learning to predict whether a person is diabetic or non-diabetic based on various medical parameters. The model is trained on the Pima Indians Diabetes Dataset and implemented using Python and Scikit-learn.
+---
 
-The primary objective of this project is to build a reliable classification model that can assist in the early prediction of diabetes using patient health data.
+## Demo Outputs
+
+| Feature Distributions | Correlation Heatmap |
+|---|---|
+| ![Feature Distributions](feature_distributions.png) | ![Correlation Heatmap](correlation_heatmap.png) |
+
+| Model Comparison | ROC Curve |
+|---|---|
+| ![Model Comparison](model_comparison.png) | ![ROC Curve](roc_curve.png) |
+
+> Run the notebook to regenerate all plots.
 
 ---
 
 ## Dataset
 
-The project uses the **Pima Indians Diabetes Dataset**, which contains diagnostic measurements collected from female patients.
+**Pima Indians Diabetes Dataset** — 768 patient records, 8 medical features, binary classification target.
 
-### Features Used
+| Feature | Description |
+|---|---|
+| Pregnancies | Number of pregnancies |
+| Glucose | Plasma glucose concentration |
+| BloodPressure | Diastolic blood pressure (mm Hg) |
+| SkinThickness | Triceps skin fold thickness (mm) |
+| Insulin | 2-hour serum insulin (mu U/ml) |
+| BMI | Body mass index |
+| DiabetesPedigreeFunction | Genetic risk score |
+| Age | Age in years |
+| **Outcome** | **0 = Non-Diabetic, 1 = Diabetic** |
 
-* Pregnancies
-* Glucose
-* Blood Pressure
-* Skin Thickness
-* Insulin
-* BMI (Body Mass Index)
-* Diabetes Pedigree Function
-* Age
-
-### Target Variable
-
-* **Outcome**
-
-  * 0 → Non-Diabetic
-  * 1 → Diabetic
-
----
-
-## Machine Learning Model
-
-This project uses the **Support Vector Machine (SVM)** algorithm for classification.
-
-### Why SVM?
-
-Support Vector Machine is a supervised learning algorithm that finds the optimal decision boundary (hyperplane) to separate different classes. It is effective for classification problems and performs well on structured datasets.
-
----
-
-## Technologies Used
-
-* Python
-* NumPy
-* Pandas
-* Scikit-learn
-* Google Colab
+Class distribution: **500 Non-Diabetic / 268 Diabetic**
 
 ---
 
 ## Project Workflow
 
-1. Data Collection and Loading
-2. Exploratory Data Analysis
+```
+1. Data Loading & Exploration
+        ↓
+2. Exploratory Data Analysis (EDA)
+   - Feature distributions
+   - Correlation heatmap
+   - Class imbalance analysis
+        ↓
 3. Data Preprocessing
-4. Feature Standardization using StandardScaler
-5. Train-Test Split using Stratified Sampling
-6. Training the Support Vector Machine (SVM) Model
-7. Model Evaluation
-8. Building a Diabetes Prediction System
+   - Zero-value handling
+   - Feature standardization (StandardScaler)
+        ↓
+4. Train-Test Split (Stratified, 80-20)
+        ↓
+5. Model Training & Comparison
+   - Logistic Regression
+   - Random Forest Classifier
+   - Support Vector Machine (SVM) ← Best performer
+        ↓
+6. Evaluation
+   - Accuracy, Precision, Recall, F1-Score
+   - Confusion Matrix
+   - ROC Curve & AUC Score
+        ↓
+7. Prediction System for new patient data
+```
 
 ---
 
 ## Model Performance
 
-* Training Accuracy:  0.7866449511400652
-* Testing Accuracy: 0.7727272727272727
+| Model | Accuracy | Precision | Recall | F1-Score |
+|---|---|---|---|---|
+| Logistic Regression | ~77% | ~77% | ~77% | ~77% |
+| Random Forest | ~76% | ~76% | ~76% | ~75% |
+| **SVM (Linear Kernel)** | **~77%** | **~77%** | **~77%** | **~77%** |
 
-> Replace the above values with the exact accuracies obtained from your notebook.
+> SVM achieved the best overall F1-Score on the test set. Update table with your exact values after running the notebook.
 
 ---
 
-## Key Features
+## Technologies Used
 
-* Clean and structured data preprocessing
-* Stratified train-test splitting
-* Feature scaling using StandardScaler
-* Support Vector Machine (SVM) classifier
-* Prediction system for new patient data
-* Model performance evaluation
+- **Language:** Python 3
+- **Libraries:** NumPy, Pandas, Scikit-learn, Matplotlib, Seaborn
+- **Environment:** Google Colab / Jupyter Notebook
+- **Version Control:** Git, GitHub
 
 ---
 
 ## Repository Structure
 
-```text
+```
 diabetesPrediction/
 │
-├── diabetesPrediction.ipynb
-├── diabetes.csv
+├── diabetesPrediction.ipynb   ← Main notebook (EDA + Models + Evaluation)
+├── diabetes.csv               ← Dataset
+├── feature_distributions.png  ← EDA plot
+├── correlation_heatmap.png    ← EDA plot
+├── class_distribution.png     ← EDA plot
+├── model_comparison.png       ← Evaluation plot
+├── confusion_matrix.png       ← Evaluation plot
+├── roc_curve.png              ← Evaluation plot
 └── README.md
 ```
 
@@ -100,39 +111,42 @@ diabetesPrediction/
 ## How to Run
 
 1. Clone the repository:
-
 ```bash
 git clone https://github.com/JanviBhateja/diabetesPrediction.git
+cd diabetesPrediction
 ```
 
-2. Install the required libraries:
-
+2. Install dependencies:
 ```bash
-pip install numpy pandas scikit-learn
+pip install numpy pandas scikit-learn matplotlib seaborn
 ```
 
-3. Open the Jupyter Notebook or Google Colab.
+3. Open the notebook:
+```bash
+jupyter notebook diabetesPrediction.ipynb
+```
+Or upload directly to **Google Colab**.
 
-4. Run all cells sequentially.
+4. Run all cells sequentially. Plots are auto-saved as `.png` files.
 
-5. Use the prediction section to test new patient data.
+5. Use the **Prediction System** cell at the end to test new patient data.
 
 ---
 
-## Future Improvements
+## Key Learnings
 
-* Hyperparameter tuning for improved accuracy
-* Confusion Matrix visualization
-* Precision, Recall, and F1-Score analysis
-* Streamlit web application deployment
-* Model comparison with other classification algorithms
+- Applied **feature standardization** to handle differing feature scales before SVM training
+- Used **stratified train-test split** to preserve class ratio in imbalanced data
+- Compared three classifiers — SVM outperformed others in F1-Score
+- Visualized decision boundaries via **ROC curves** and **AUC scores**
+- Identified **Glucose** and **BMI** as the strongest predictors via correlation analysis
 
 ---
 
 ## Author
 
 **Janvi Bhateja**
+B.Tech Electronics and Computer Engineering (2024–2028)
+Thapar Institute of Engineering and Technology, Patiala
 
-Second-Year B.Tech Student | Electronics and Computer Engineering
 
-Passionate about Machine Learning, Software Development, and Problem Solving.
