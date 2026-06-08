@@ -145,7 +145,7 @@ Or upload directly to **Google Colab**.
 
 ## Author
 
-**Janvi Bhateja**
+**Janvi**
 B.Tech Electronics and Computer Engineering (2024–2028)
 Thapar Institute of Engineering and Technology, Patiala
 
